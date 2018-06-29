@@ -1,0 +1,15 @@
+.social-link {
+  font-size: 20px;
+  padding-left: 0.3rem;
+  padding-right: 0.3rem;
+  a { color: $lightGray; opacity: .7; transition: .3s }
+  a:hover { opacity: 1 }
+}
+.social-links {
+  display: flex;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
