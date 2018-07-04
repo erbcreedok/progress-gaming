@@ -1,9 +1,14 @@
 html {
-  font-family: 'Acrom', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   font-size: 10px;
 }
 body {
+  font-family: 'Acrom', Helvetica, Arial, sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   font-size: 1.4rem;
+  line-height: 1.24;
+}
+
+section {
+  position: relative;
 }

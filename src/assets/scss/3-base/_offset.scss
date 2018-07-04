@@ -1,0 +1,42 @@
+.mb-20 {
+  margin-bottom: 20px!important;
+}
+.mb-25 {
+  margin-bottom: 25px!important;
+}
+.mb-40 {
+  margin-bottom: 40px!important;
+}
+.mb-55 {
+  margin-bottom: 55px!important;
+}
+.mb-60 {
+  margin-bottom: 60px!important;
+}
+.mb-70 {
+  margin-bottom: 70px!important;
+}
+.mr-80 {
+  margin-right: 80px!important;
+}
+@include media-breakpoint-up(md) {
+  .mr-md-80 {
+    margin-right: 80px!important;
+  }
+}
+
+
+.py-70 {
+  padding-top: 70px!important;
+  padding-bottom: 70px!important;
+}
+.py-80 {
+  padding-top: 80px!important;
+  padding-bottom: 80px!important;
+}
+.pt-70 {
+  padding-top: 70px!important;
+}
+.pb-220 {
+  padding-bottom: 220px!important;
+}

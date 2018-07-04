@@ -1,6 +1,16 @@
+.modal-open {
+  overflow: hidden;
+  .modal {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+}
 .modal-hr {
-  background: $secondary-color;
+  background: $orange2;
   margin: 35.5px 0;
+}
+.modal-title {
+  font-size: 1.8rem;
 }
 .modal-body {
   position: relative;

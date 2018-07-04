@@ -60,6 +60,16 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+
+.icon-vk:before {
+  content: "\ea98";
+}
+.icon-youtube:before {
+  content: "\ea9d";
+}
+.icon-play:before {
+  content: "\e912";
+}
 .icon-angle-left:before {
   content: "\e900";
 }

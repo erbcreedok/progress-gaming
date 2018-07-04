@@ -1,0 +1,64 @@
+@import "../../assets/scss/3-base/variables";
+@import "../../../node_modules/bootstrap/scss/bootstrap-grid";
+
+header {
+  height: 80px;
+  font-weight: 500;
+  background: #fff;
+}
+.navbar-light .navbar-nav .nav-link {
+  color: $black;
+}
+.navbar {
+  background-color: $white;
+  min-height: 80px;
+  box-shadow: 0 1px 2px rgba($black, .2);
+  &.fixed-top {
+    z-index: 1000;
+  }
+}
+.navbar .navbar-nav.main-nav .nav-link {
+  display: inline-block;
+}
+.navbar .navbar-nav.main-nav .nav-link.active {
+  color: $orange;
+  position: relative;
+  &:after {
+    content: '';
+    height: 2px;
+    border-radius: 1px;
+    display: block;
+    position: absolute;
+    left: 5px; right: 5px; bottom: 0;
+    background-color: $orange;
+  }
+}
+.main-nav li {
+  white-space: nowrap;
+  @include media-breakpoint-up(lg) {
+    margin-left: .3rem;
+    margin-right: .3rem;
+  }
+  @include media-breakpoint-up(xl) {
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+  }
+}
+
+.social-links {
+  .social-link {
+    @include media-breakpoint-up(lg) {
+      margin-left: .4rem;
+      margin-right: .4rem;
+    }
+    @include media-breakpoint-up(xl) {
+      margin-left: .75rem;
+      margin-right: .75rem;
+    }
+  }
+}
+
+.navbar-nav, .social-links {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}

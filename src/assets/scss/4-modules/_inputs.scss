@@ -1,20 +1,20 @@
 .form-group label {
   font-size: 1.4rem;
-  color: $black-default;
+  color: #333;
 }
 .form-group .form-control {
   padding: 11px 15px;
-  font-size: 1.6rem;
-  font-weight: normal;
-  border-color: $whitegray-secondary;
-  background: $whitegray-lightest;
+  font-size: 1.4rem;
+  font-weight: 400;
+  border-color: #EFEFEF;
+  background: #FCFCFC;
   border-radius: 5px;
   &::placeholder {
-    color: $lightgray-secondary;
+    color: #a7a6aa;
   }
   &.disabled, &[disabled] {
-    background: $whitegray-default;
-    color: $lightgray-default;
+    background: #edebf1;;
+    color: #a7a6aa;;
   }
   &.no-valid {
     border: 1px solid $red;
@@ -22,5 +22,5 @@
 }
 form .notifier {
   font-size: 1.4rem;
-  color: $lightgray-secondary;
+  color: #a7a6aa;
 }

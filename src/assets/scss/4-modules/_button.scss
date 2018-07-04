@@ -4,10 +4,26 @@
   border-radius: 2rem;
   min-width: 150px;
   min-height: 40px;
+  font-weight: 500;
+}
+
+.btn-sm, .btn-group-sm > .btn {
+  padding: 0.25rem 0.5rem;
+  min-height: 30px;
 }
 
 .btn-black {
   color: $white;
   background-color: $black;
   border-color: $black;
+}
+.btn-transparent {
+  color: $black;
+  border: 1px solid #D9D8DB;
+  background: none;
+}
+.btn-transparent-black {
+  color: $black;
+  border: 1px solid $black;
+  background: none;
 }
