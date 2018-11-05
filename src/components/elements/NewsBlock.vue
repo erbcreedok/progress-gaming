@@ -1,7 +1,7 @@
 <template>
     <router-link class="box news-block d-block"
                  v-if="article"
-                 :to="'/article/' + article.article">
+                 :to="'/article/id' + article.article">
         <progressive-background class="pg-bg"
                                 :src="article.image.hq"
                                 :placeholder="article.image.thumb"

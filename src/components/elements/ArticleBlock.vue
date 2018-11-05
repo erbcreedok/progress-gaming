@@ -31,6 +31,7 @@
 <style scoped lang="scss">
     .article-block {
         cursor: zoom-in;
+        height: 211px;
         .article-img {
             height: 162px;
             border-radius: 2.7px;

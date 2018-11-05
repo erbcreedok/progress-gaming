@@ -1,6 +1,6 @@
 <template>
     <div class="about-page">
-        <section class="bg-black color-white" style="position: fixed;top: 80px;left: 0;right: 0;z-index: 1000;">
+        <section class="bg-black color-white" style="position: fixed;top: 80px;left: 0;right: 0;z-index: 999;">
             <div class="container py-4">
                 <div class="d-flex tabs">
                     <router-link to="/about/organization" class="mr-md-80 mr-3 text-nowrap color-inherit" active-class="active">

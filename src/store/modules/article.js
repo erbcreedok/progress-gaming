@@ -5,28 +5,35 @@ import { articleOptions, mapArticles } from '../models/articles'
 
 const state = {
     isLoading: false,
-    article: {}
+    articles: {},
+    article: null
+}
+
+const getters = {
 }
 
 const actions = {
     getArticle({commit}, id) {
         commit('setLoading', true)
-        fs.collection('articles').doc('id'+id).get().then((doc) => {
+        commit('setArticle', id)
+        return fs.collection('articles').doc('id'+id).get().then((doc) => {
             if (!doc.exists) { commit('setLoading', false); return }
             const payload = doc.data();
             commit('setLoading', false);
-            commit('setArticle',  payload);
+            commit('addArticle',  payload);
+            commit('setArticle',  payload.id);
         })
     },
-    setArticles({commit}) {
+    async setArticles({commit}) {
         commit('setLoading', true);
-        fl.content.get('article', articleOptions).then( shot => {
+        await fl.content.get('article', articleOptions).then( async shot => {
             if(!shot) return;
             const articles = mapArticles(shot);
-            articles.map((article) => {
-                fs.collection('articles').doc('id'+article.id).set(article);
+            await Promise.all(articles.map((article) => {
+                return fs.collection('articles').doc('id'+article.id).set(article);
+            })).then(() => {
+                commit('setLoading', false);
             });
-            commit('setLoading', false);
         });
     }
 }
@@ -35,14 +42,18 @@ const mutations = {
     setLoading(state, isLoading) {
         state.isLoading = isLoading
     },
-    setArticle(state, article) {
-        state.article = article;
+    setArticle(state, articleId) {
+        state.article = state.articles['id' + articleId];
+    },
+    addArticle(state, article) {
+        state.articles['id' + article.id] = article;
     }
 }
 
 export default {
     namespaced: true,
     state,
+    getters,
     actions,
     mutations,
 }

@@ -92,6 +92,7 @@
     import '../../../node_modules/slick-carousel/slick/slick.css'
 
     Vue.use(VueProgressiveImage)
+    Vue.use(Slick)
 
     export default {
         name: 'MediaView',

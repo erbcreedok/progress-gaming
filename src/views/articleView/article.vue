@@ -1,7 +1,7 @@
 <template>
     <div class="media-page">
         <div class="article-body" v-if="article && article!=={} && article.id">
-        <div class="section">
+        <section>
             <progressive-background
                     class="section-bg bluefy"
                     :src="article.image.hq"
@@ -10,9 +10,9 @@
             ></progressive-background>
             <div class="container py-80 color-white">
                 <p class="normal mb-60">
-                    <router-link class="no-appearance" to="/news">
+                    <a class="no-appearance" @click="$router.go(-1)">
                         <span class="icon-arrow-left mr-3"></span> <span class="text-uppercase">ВЕРНУТЬСЯ НАЗАД</span>
-                    </router-link>
+                    </a>
                 </p>
                 <h1 class="font-weight-medium mb-40" v-html="article.title">
                 </h1>
@@ -24,13 +24,13 @@
                 </p>
 
             </div>
-        </div>
+        </section>
         <section class="bg-white py-70">
             <div class="container">
                 <article v-html="article.body"></article>
             </div>
         </section>
-        <section class="bg-light-yellow py-70">
+        <section class="bg-light-yellow py-70" v-if="article.related && article.related.length > 0">
             <div class="container">
                 <div class="d-flex mb-5">
                     <h2 class="text-uppercase">ВАМ БУДЕТ ИНТЕРЕСНО УЗНАТЬ</h2>
@@ -39,10 +39,10 @@
                                    :rightDisabled="newsSlickAccess.right"
                                    @onLeftClick="prevNews()"
                                    @onRightClick="nextNews()"
-                                   class="d-inline-block"
+                                   class="d-inline-block ml-auto"
                     ></button-arrows>
                 </div>
-                <slick class="row mb-5 slick-rounded-sm"
+                <slick class="row mb-5 slick-rounded-sm flex-nowrap"
                        v-if="article.related && article.related.length !== 0"
                        ref="newsSlick" :options="newsOptions"
                        @afterChange="handleNewsSlickChange"
@@ -70,6 +70,7 @@
     import '../../../node_modules/slick-carousel/slick/slick.css'
 
     Vue.use(VueProgressiveImage)
+    Vue.use(Slick)
 
     export default {
         name: 'ArticleView',
@@ -81,6 +82,7 @@
                 newsOptions: {
                     slidesToShow: 3,
                     infinite: false,
+                    variableWidth: true,
                     arrows: false,
                     responsive: [
                         {
@@ -109,6 +111,7 @@
                             breakpoint: 380,
                             settings: {
                                 slidesToShow: 1,
+                                variableWidth: false,
                                 centerMode: true,
                                 centerPadding: '30px',
                             }
@@ -123,8 +126,7 @@
         },
         computed: {
             ...mapState({
-                article: state => state.article.article,
-                news: state => state.news.top,
+                article: state => state.article.article
             })
         },
         methods: {
@@ -149,7 +151,14 @@
             const articleId = this.$route.params.id;
             this.$store.dispatch('article/getArticle', articleId)
         },
-
+        watch: {
+            $route (to, from) {
+                if (to.params.id !== from.params.id) {
+                    const articleId = to.params.id;
+                    this.$store.dispatch('article/getArticle', articleId)
+                }
+            }
+        }
     }
 </script>
 

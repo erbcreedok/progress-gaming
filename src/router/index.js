@@ -25,7 +25,7 @@ export function createRouter () {
             { path: '/news', component: NewsView},
             { path: '/partners', component: PartnersView },
             { path: '/contacts', component: ContactsView },
-            { path: '/article/:id', component: ArticleView },
+            { path: '/article/id:id', component: ArticleView },
             { path: '/article/', redirect: '/'},
             { path: '/updateData/', component: Updater},
             { path: '*', redirect: '/'}

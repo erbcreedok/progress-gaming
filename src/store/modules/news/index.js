@@ -53,16 +53,18 @@ const actions = {
             if(!doc.exists) { commit('setLoading', false); return }
             const newsCount = doc.data();
             commit('setLoading', false);
-            commit('setAllNewsCount',  newsCount);
+            commit('setAllNewsCount',  newsCount.count);
         });
     },
-    setAllNewsCount({commit}) {
+    async setAllNewsCount({commit}) {
         commit('setLoading', true)
-        fl.content.get('news', {fields: ['id']}).then(shot => {
+        await fl.content.get('news', {fields: ['id']}).then(async shot => {
             if(!shot) return;
             const count = Object.keys(shot);
             commit('setLoading', false);
-            fs.collection('static').doc('newsCount').set({count: count.length});
+            return await fs.collection('static').doc('newsCount').set({count: count.length}).then(() => {
+                console.log('setAllNewsCount')
+            });
         })
     },
     getTopNews({commit}) {
@@ -76,9 +78,9 @@ const actions = {
             commit('setTopNews', payload);
         })
     },
-    setTopNews({commit}) {
+    async setTopNews({commit}) {
         commit('setLoading', true)
-        fl.content.get('mainNews', {
+        await fl.content.get('mainNews', {
             fields: ['news_list'],
             populate: [
                 {
@@ -86,7 +88,7 @@ const actions = {
                     subFields: [{field:'news', ...newsOptions}]
                 }
             ]
-        }).then(shot => {
+        }).then(async shot => {
             if(!shot) return;
             let top = [];
             shot.news_list.map((newsItem) => {
@@ -94,10 +96,14 @@ const actions = {
             });
             const news = mapNews(top);
             commit('setLoading', false);
-            news.map((newsItem) => {
-                fs.collection('topNews').doc('id'+newsItem.id).set(newsItem);
+            await Promise.all(news.map((newsItem) => {
+                return fs.collection('topNews').doc('id'+newsItem.id).set(newsItem).then(() => {
+                    console.log('setTopNews');
+                });
+            }));
+            await fs.collection('static').doc('topNews').set({news: news}).then(() => {
+                console.log('setTopNews');
             });
-            fs.collection('static').doc('topNews').set({news: news});
         })
     },
     getPageNews({commit}, page) {
@@ -107,7 +113,7 @@ const actions = {
         fs.collection('news').orderBy('order').startAt(start).limit(itemsPerPage).get().then((shots) => {
             let payload = [];
             shots.forEach((doc) => {
-                payload.push(doc.data())
+               payload.push(doc.data())
             });
             commit('setLoading', false);
             commit('setPageNews', payload);
@@ -124,15 +130,15 @@ const actions = {
             commit('setAllNews', payload);
         })
     },
-    setAllNews({commit}) {
+    async setAllNews({commit}) {
         commit('setLoading', true)
-        fl.content.get('news', newsOptions).then(shot => {
+        await fl.content.get('news', newsOptions).then(async shot => {
             if(!shot) return;
             const news = mapNews(shot);
-            fs.collection('static').doc('all').set({news: news});
-            news.map((newsItem) => {
-                fs.collection('news').doc('id'+newsItem.id).set(newsItem);
-            });
+            await fs.collection('static').doc('all').set({news: news});
+            await Promise.all(news.map((newsItem) => {
+                return fs.collection('news').doc('id'+newsItem.id).set(newsItem);
+            }));
          })
     },
     getNewsItem({commit}, id) {

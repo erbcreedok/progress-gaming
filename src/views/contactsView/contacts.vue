@@ -108,14 +108,14 @@
                     event.preventDefault();
 
                     const data = {
-                        to: 'erbcreedok@gmail.com',
+                        to: 'cyberacademy.progress@gmail.com',
                         subject: 'PG: Новая заяка от ' + this.formData.name,
                         message: 'У вас новая заявка от ' + this.formData.name
                         + '<br/> Телефон: ' + this.formData.phone
                         + ((this.formData.extra !== '') ? ('<br/> Сообщение: ' + this.formData.extra) : ''),
                     };
 
-                    http.post('http://pg.efa.kz/mail.php', data);
+                    http.post('http://progressgaming.kz/mail.php', data);
 
                     this.formSent = true;
 

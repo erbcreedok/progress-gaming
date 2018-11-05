@@ -22,7 +22,8 @@ export const articleOptions = {
 };
 
 export const mapArticles = (shot) => {
-    return Object.keys(shot).sort((a,b) => shot[a].order - shot[b].order).map((key) => {
+    if (!shot) return;
+    return Object.keys(shot).map((key) => {
         let n = shot[key];
         return mapArticle(n);
     });
@@ -36,7 +37,7 @@ export const mapArticle = (shot) => {
         hq: article.image_hd && article.image_hd[0] ? article.image_hd[0].url : null
     };
     article.date = new Date(article.date);
-    article.related = mapNews(article.related);
+    article.related = article.related ? mapNews(article.related) : null;
     delete article.thumb;
     delete article.image_hd;
     return article;

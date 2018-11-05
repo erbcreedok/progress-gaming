@@ -15,9 +15,9 @@
             </div>
             <div class="row">
                 <div class="col-md-7" style="border-radius: 10px; overflow: hidden">
-                    <slick class="row" ref="boxes" :options="boxOptions">
+                    <slick class="row flex-nowrap" ref="boxes" :options="boxOptions">
                         <div class="col-12">
-                            <div class="box d-flex align-items-center flex-nowrap" style="background-image: url(https://firebasestorage.googleapis.com/v0/b/pg-media-b4329.appspot.com/o/box1%402x-min.jpg?alt=media&token=52429935-0725-4e10-87d8-3cf1d1a33ad8)">
+                            <div class="box d-flex align-items-center" style="background-image: url(https://firebasestorage.googleapis.com/v0/b/pg-media-b4329.appspot.com/o/box1%402x-min.jpg?alt=media&token=52429935-0725-4e10-87d8-3cf1d1a33ad8)">
                                 <progressive-background src="https://firebasestorage.googleapis.com/v0/b/pg-media-b4329.appspot.com/o/box1-min.jpg?alt=media&token=77ee2d3f-48bd-491e-9c61-b373ed25ddbf" placeholder="https://firebasestorage.googleapis.com/v0/b/pg-media-b4329.appspot.com/o/box1-thumb-min.jpg?alt=media&token=c52aa294-4530-43ab-94ba-fe0cf8199da0" class="pg-bg"></progressive-background>
                                 <div class="content">
                                     <h2 class="mb-3">Стань PRO!</h2>
